@@ -1,5 +1,6 @@
 package br.com.matheus.main;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import br.com.matheus.models.Movie;
+import br.com.matheus.services.HTMLGenerator;
 import br.com.matheus.services.HttpClientService;
 import br.com.matheus.utils.DataBind;
 
@@ -22,6 +24,7 @@ public class Application {
 		Movie[] movies = dataBind.fromJson(json, Movie[].class);
 		List<Movie> moviesList = Arrays.asList(movies);
 
-		moviesList.forEach(System.out::println);
+		HTMLGenerator htmlGenerator = new HTMLGenerator(new FileWriter("movies.html"));
+		htmlGenerator.generate(moviesList);
 	}
 }
