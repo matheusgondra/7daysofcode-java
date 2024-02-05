@@ -9,4 +9,9 @@ public record Movie(
 	@JsonProperty("poster_path") String poster,
 	@JsonProperty("vote_average") Double rating,
 	@JsonProperty("release_date") String releaseDate
-) {}
+) implements Comparable<Movie> {
+	@Override
+	public int compareTo(Movie other) {
+		return other.rating().compareTo(this.rating());
+	}
+}
